@@ -32,7 +32,7 @@ let resolveWebContents: ((wc: any) => void) | undefined;
 
 function createWindow() {
   win = new BrowserWindow({
-    width: 800,
+    width: 900,
     height: 600,
     autoHideMenuBar: true,
     webPreferences: {
@@ -44,7 +44,7 @@ function createWindow() {
   win.loadFile('../index.html');
 
   if (resolveWebContents) resolveWebContents(win.webContents);
-  win.webContents.openDevTools({activate: false});
+  // win.webContents.openDevTools({activate: false});
 
   // Handle external (web) links
   win.webContents.on('will-navigate', (ev: any, url: string) => {
