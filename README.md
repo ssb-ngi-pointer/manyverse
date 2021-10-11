@@ -45,7 +45,9 @@ Open up Bob's Manyverse desktop and with `SSB_DIR=database npm run desktop` on a
 > Manyverse "master" branch. No CPU load throttling.
 
 ```
-npx ssb-fixtures --seed=apple --messages=100000 --authors=1000 --outputDir=database --slim --allkeys --followGraph --report --progress
+npx ssb-fixtures --seed=apple --messages=100000 --authors=1000 \
+--slim --allkeys --followGraph --report --progress \
+--outputDir=database
 ```
 
 Results of repeated runs:
@@ -62,5 +64,8 @@ Results of repeated runs:
 > No CPU load throttling.
 
 ```
-npx ssb-fixtures --seed=apple --messages=100000 --authors=1000 --outputDir=database --slim --allkeys --followGraph --report --progress --indexFeeds=100 --indexFeedTypes=post,vote,contact,about,private
+npx ssb-fixtures --seed=apple --messages=100000 --authors=1000 \
+--slim --allkeys --followGraph --report --progress \
+--indexFeeds=100 --indexFeedTypes=post,vote,contact,about,private \
+--outputDir=database
 ```
