@@ -76,6 +76,100 @@ const config = makeConfig('ssb', {
       tunnel: [{transform: 'shs'}],
     },
   },
+  replicationScheduler: {
+    partialReplication: {
+      0: {
+        subfeeds: [
+          {feedpurpose: 'main'},
+          {
+            feedpurpose: 'indexes',
+            subfeeds: [
+              {
+                feedpurpose: 'index',
+                $format: 'indexed',
+              },
+            ],
+          },
+        ],
+      },
+
+      1: {
+        subfeeds: [
+          {
+            feedpurpose: 'indexes',
+            subfeeds: [
+              {
+                feedpurpose: 'index',
+                metadata: {
+                  querylang: 'ssb-ql-0',
+                  query: {author: '$main', type: null, private: true},
+                },
+                $format: 'indexed',
+              },
+              {
+                feedpurpose: 'index',
+                metadata: {
+                  querylang: 'ssb-ql-0',
+                  query: {author: '$main', type: 'post', private: false},
+                },
+                $format: 'indexed',
+              },
+              {
+                feedpurpose: 'index',
+                metadata: {
+                  querylang: 'ssb-ql-0',
+                  query: {author: '$main', type: 'vote', private: false},
+                },
+                $format: 'indexed',
+              },
+              {
+                feedpurpose: 'index',
+                metadata: {
+                  querylang: 'ssb-ql-0',
+                  query: {author: '$main', type: 'about', private: false},
+                },
+                $format: 'indexed',
+              },
+              {
+                feedpurpose: 'index',
+                metadata: {
+                  querylang: 'ssb-ql-0',
+                  query: {author: '$main', type: 'contact', private: false},
+                },
+                $format: 'indexed',
+              },
+            ],
+          },
+        ],
+      },
+
+      2: {
+        subfeeds: [
+          {
+            feedpurpose: 'indexes',
+            subfeeds: [
+              {
+                feedpurpose: 'index',
+                metadata: {
+                  querylang: 'ssb-ql-0',
+                  query: {author: '$main', type: 'about', private: false},
+                },
+                $format: 'indexed',
+              },
+              {
+                feedpurpose: 'index',
+                metadata: {
+                  querylang: 'ssb-ql-0',
+                  query: {author: '$main', type: 'contact', private: false},
+                },
+                $format: 'indexed',
+              },
+            ],
+          },
+        ],
+      },
+    },
+  },
 });
 
 SecretStack()
@@ -87,10 +181,12 @@ SecretStack()
   .use(require('ssb-db2/compat/log-stream'))
   .use(require('ssb-db2/compat/history-stream'))
   .use(require('ssb-deweird/producer'))
+  .use(require('ssb-meta-feeds'))
+  .use(require('ssb-subset-rpc'))
   // Replication
   .use(require('ssb-ebt')) // needs: db2/compat
   .use(require('ssb-friends')) // needs: db2
-  .use(require('ssb-replication-scheduler')) // needs: friends, ebt
+  .use(require('ssb-replication-scheduler')) // needs: friends, ebt, meta-feeds
   // Connections
   .use(require('./plugins/multiserver-addons'))
   .use(require('ssb-lan'))
