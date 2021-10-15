@@ -186,12 +186,12 @@ SecretStack()
   // Replication
   .use(require('ssb-ebt')) // needs: db2/compat
   .use(require('ssb-friends')) // needs: db2
-  .use(require('ssb-replication-scheduler')) // needs: friends, ebt, meta-feeds
   // Connections
   .use(require('./plugins/multiserver-addons'))
   .use(require('ssb-lan'))
   .use(bluetoothTransport(keys, process.env.APP_DATA_DIR))
   .use(require('ssb-conn')) // needs: db2, friends, lan, bluetooth
+  .use(require('ssb-replication-scheduler')) // needs: friends, ebt, meta-feeds
   .use(require('ssb-conn-firewall')) // needs: friends
   .use(require('ssb-room-client')) // needs: conn
   .use(require('ssb-http-auth-client')) // needs: conn
