@@ -19,7 +19,8 @@ replication in an end-to-end environment.
 > Timer starts when the connection is displayed on the Connections tab, and is
 > stopped when the Public tab has stopped showing indicator of new messages.
 
-First, generate the fixtures (see sections Before and After).
+First, generate the fixtures (see sections Full replication and Partial
+replication).
 
 Then, build and run Manyverse desktop:
 
@@ -35,10 +36,13 @@ npm run build-desktop
 SSB_DIR=database npm run desktop
 ```
 
-First run Manyverse desktop with `SSB_DIR=database npm run desktop` on "Alice" so she can migrate flume to ssb-db2, and make sure that it is fully migrate. Then delete
+First run Manyverse desktop with `SSB_DIR=database npm run desktop` on "Alice"
+so she can migrate flume to ssb-db2, and make sure that it is fully migrate.
+Then delete
 `database/flume` folder, and restart Alice.
 
-Open up Bob's Manyverse desktop and with `SSB_DIR=database npm run desktop` on a `database` folder that **only** has Bob's `secret` file.
+Open up Bob's Manyverse desktop and with `SSB_DIR=database npm run desktop` on a
+`database` folder that **only** has Bob's `secret` file.
 
 # Full replication
 
